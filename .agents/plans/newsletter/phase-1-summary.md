@@ -9,7 +9,7 @@ The project visualizes content through abstract, looping sculpture imagery in a 
 
 The target visual appearance is defined by this mockup:
 
-![ai chronicle hub simplicity](/Users/horvathgergo/.gemini/antigravity/scratch/ai-chronicle-hub/.agents/plans/newsletter/monochrome_abstract_sculptures.png)
+![ai chronicle hub simplicity](./monochrome_abstract_sculptures.png)
 
 ---
 
