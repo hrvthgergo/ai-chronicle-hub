@@ -45,6 +45,7 @@ This document details the manual and automated validation tests required to veri
 
 ## 3. Frontend & DOM Assertions
 
+### 3.1 Visual Design & Layout Assertions
 1. **Simplicity UI Review**:
    - Render `index.html` in a web browser.
    - Assert that there are **zero visible lines, borders, divider rules, or card outlines** on the canvas.
@@ -53,9 +54,9 @@ This document details the manual and automated validation tests required to veri
    - Click the edition select dropdown and verify it lists all active dates specified inside `data/index.js` dynamically.
    - Swap the dropdown selection and assert that the layout clears and repopulates the category columns instantly with the select edition content.
 3. **Card Layout Structure**:
-   - Assert that content cards in the grid columns stack elements strictly vertically (sculpture image at the top, followed by bold serif title, key aspect summary teaser, and metadata at the bottom).
+   - Assert that content cards in the grid columns stack elements strictly vertically (sculpture image at the top, followed by bold serif title with an actionable link anchor, key aspect summary teaser, and metadata at the bottom).
    - Assert that images are elongated rounded squircles (`border-radius: 24px` and aspect-ratio `1.5`).
-   - Click a card and verify it redirects to the source URL in a new browser tab (`target="_blank"`).
+   - Click a card title link and verify it redirects to the source URL in a new browser tab (`target="_blank"`).
 4. **Soft Gold Hover Highlight**:
    - Hover over a content card and assert:
      - The hovered title text transitions to the soft quiet gold color.
@@ -63,4 +64,36 @@ This document details the manual and automated validation tests required to veri
      - No solid outlines or borders are shown.
      - **Exactly one** content card shows the active highlight state at any time.
 5. **Real-time Filter Invalidation**:
-   - Type in the `search...` input and assert that cards matching titles or summaries stay visible, while non-matching cards are set to `display: none` instantly.
+   - Type in the `search...` input and assert that matching cards across current and historical issues are retrieved and displayed, while non-matching cards are hidden.
+
+### 3.2 Responsive Design & Device Verification
+Verify layout responsiveness and fluid viewport scaling by simulating target device profiles in Chrome Developer Tools:
+
+#### Chrome DevTools Setup Procedure:
+1. Open the built application in Google Chrome.
+2. Press `F12` or `Cmd + Option + I` to open Chrome Developer Tools.
+3. Click the **Toggle device toolbar** button (or press `Cmd + Shift + M`).
+4. Select the target devices from the device dropdown list. (If any device profile is missing, click "Edit..." at the bottom of the list and check the respective model).
+
+#### Device-Specific Test Assertions:
+
+1. **Pixel 7 (Compact Mobile - 412 x 915 px)**
+   - **Grid Collapse**: Assert that the three category columns wrap and stack vertically into a single column.
+   - **Mobile Options Menu**: Assert that the historical edition selector and option controls transition from a header block into a mobile-friendly bottom-sheet drawer.
+   - **Font Scaling**: Verify that the main branding title uses CSS `clamp()` to scale down to fit the narrow viewport width on a single line without clipping.
+   - **No Horizontal Scroll**: Assert that no element causes overflow, leaving the horizontal scrollbar disabled.
+
+2. **Asus Zenbook Fold (Foldable Screen - 850 x 1280 px)**
+   - **Adaptive Column Spans**: Verify the layout in both folded (narrow double-column or single-column depending on aspect) and flat tablet states.
+   - **Touch Targets**: Assert that interactive target zones (like links, search input, and edition select dropdown) maintain a minimum footprint of `44 x 44 px` with clean spacing to prevent accidental mis-taps.
+   - **Elastic Grids**: Ensure container width handles the folding crease aspect ratio dynamically without layout shifts or text wrapping overlaps.
+
+3. **iPad Pro (Large Tablet - 1024 x 1366 px)**
+   - **Portrait Verification (1024 x 1366 px)**: Assert that columns adapt gracefully (either reflow to 2 columns or remain in a readable 3-column layout depending on grid space minmax settings) without clipping card summaries.
+   - **Landscape Verification (1366 x 1024 px)**: Assert that the 3-column category grid displays side-by-side with full readability.
+   - **Spacing Integrity**: Verify margins and padding scale using viewport-relative units (`vw`, `vh`) and remain visually balanced.
+
+4. **Nest Hub Max (Smart Display / Desktop - 1280 x 800 px)**
+   - **Grid Alignment**: Verify the three category columns render in a side-by-side layout, filling the screen width evenly.
+   - **Typography Scaling**: Assert that the fluid clamp sizes scale fonts up appropriately to remain readable from a typical smart display distance (~1.5 meters).
+   - **Borders & Spaces**: Verify that separation is achieved purely through blank whitespace, maintaining the strict simplicity rule.
