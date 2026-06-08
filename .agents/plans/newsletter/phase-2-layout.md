@@ -20,10 +20,10 @@ This section defines the core visual components of the dashboard interface, thei
 - **Description**: Positioned at the very top of the layout. The branding title displays the lowercase serif string "ai chronicle hub" as the primary page identifier. The search bar is a sharp, clean text input field aligned on the right.
 - **Data Source & Dynamic Bindings**:
   - **Branding Title**: Built on static HTML template content.
-  - **Search Bar**: Captures real-time text input on the client-side. The JavaScript controller (`app.js`) binds a keyup listener to filter the content cards across all three columns dynamically. Cards are matched by searching for matching text in their titles, summaries, and tags (labels).
+  - **Search Bar**: Captures real-time text input on the client-side. The JavaScript controller (`app.js`) binds a keyup listener to search and filter content cards. The search looks through the current/most recent edition as well as all historical issues. Cards are matched by searching for matching text in their titles, summaries, and tags (labels).
 
 ### 2.2 Edition Identifier & Selector
-- **Description**: Positioned on the left, directly underneath the main branding title. It displays the current newsletter edition date and includes a borderless selector dropdown to navigate through historical issues.
+- **Description**: Positioned on the left, directly underneath the main branding title. It displays the current newsletter edition date in the format of yyyy-mm-dd (e.g. `2026-06-08` which stands for 8th of June, 2026) and includes a borderless selector dropdown to navigate through historical issues.
 - **Data Source & Dynamic Bindings**:
   - The list of selectable options is populated dynamically by loading the catalog array `availableEditions` from the global configuration file `data/index.js`.
   - On page load, the selector defaults to the latest available edition.
@@ -45,6 +45,16 @@ This section defines the core visual components of the dashboard interface, thei
     - `labels`: Tag array for search/filtration.
     - `date`: ISO 8601 offset timestamp.
     - `author`: Content source author.
+
+### 2.4 Content Cards / Tiles
+- **Description**: Individual visual cards arranged within the category grids, displaying curated information.
+- **Content Elements**:
+  - Grayscale sculpture-based picture.
+  - Actionable bold serif content title, with an embedded link anchor (`<a>` tag) leading to the original article source.
+  - Short high-fidelity editorial summary written by the curation agent.
+  - Original author's name.
+  - Date of the article.
+- **Data Source & Dynamic Bindings**: Built dynamically using the selected weekly JSON database (`data/yyyy-mm/data-yyyy-mm-dd.json`), binding the `title`, `picture`, `url`, `summary`, `author`, and `date` attributes of each item object to its respective HTML element.
 
 ---
 
@@ -87,11 +97,13 @@ This section lists the layout, styling, typography, and interactive rules govern
   - `<article>`: Represents individual content cards.
   - `<time>`: Renders publication dates using structured ISO attributes.
   - `<select>`: The borderless historical edition selector.
-  - `<a>`: Wrap each content card block with:
+  - `<a>`: Embedded within the content title, wrapping the title text:
     ```html
-    <a href="SOURCE_URL" target="_blank" rel="noopener noreferrer" class="content-card">
+    <h3 class="content-title">
+      <a href="SOURCE_URL" target="_blank" rel="noopener noreferrer">title text</a>
+    </h3>
     ```
-    This ensures that clicking any area of a card redirects the user to the source URL in a new browser tab.
+    This ensures that the card is semantically anchored to the source URL. To make the entire card clickable without nesting anchors (which violates HTML standards), a CSS pseudo-element overlay (`::after` on the `<a>` tag) is applied to expand the click target across the parent card area.
 
 ### 3.3 Typography & Vernon Adams Fonts
 - **Scope**: Global text elements.
@@ -119,7 +131,7 @@ This section lists the layout, styling, typography, and interactive rules govern
 - **Scope**: Content card elements (`<article>`).
 - **Rule Details**: Individual content items inside the column grids must display fields vertically stacked in this exact order (image directly above text):
   1. Abstract sculpture image container.
-  2. Bold serif content title (lowercase).
+  2. Bold serif content title (lowercase) as an actionable title with an embedded link anchor (`<a>` tag) leading to the original article source.
   3. Key summary teaser text.
   4. Date and Author metadata block.
 
@@ -153,9 +165,14 @@ This section lists the layout, styling, typography, and interactive rules govern
   ```
 
 ### 3.10 Responsive Web Design (RWD) Rules
-- **Scope**: Global viewport resizing.
+- **Scope**: Global viewport resizing and verification.
 - **Rule Details & Affected Elements**:
   - **Fluid Typography**: Sizing scales dynamically using `clamp()` (e.g., `font-size: clamp(2rem, 5vw, 3.5rem)` for the branding title).
   - **Adaptive Column Grids**: Columns adjust using CSS Grid repeat (`grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))`), falling back to a single column on compact mobile devices.
   - **Margins & Spacing**: Viewport-relative padding (`vw`, `vh`, `rem`) scales spacing gracefully.
   - **Mobile Options menu**: On smaller touch viewports, the options menu transitions into a clean bottom-sheet or slide-in drawer.
+  - **Responsive Verification**: The design must be thoroughly tested and aligned across presetted screen sizes in Chrome Developer Tools, ensuring full layout integrity and no overflow issues on:
+    - **Pixel 7** (compact mobile)
+    - **Asus Zenbook Fold** (foldable desktop/tablet)
+    - **iPad Pro** (large tablet)
+    - **Nest Hub Max** (smart display/desktop)
