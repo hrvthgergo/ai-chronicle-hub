@@ -1,0 +1,139 @@
+{
+  "edition": "2026-06-08",
+  "product and concept releases": [
+    {
+      "title": "introducing claude opus 4.8",
+      "picture": "assets/sculptures/sculpture_7.png",
+      "url": "https://www.anthropic.com/news/claude-opus-4-8",
+      "summary": "the latest iteration of anthropic's flagship model, delivering unmatched reasoning, mathematics accuracy, and expanded multimodal capabilities.",
+      "labels": [
+        "frontier models",
+        "claude opus",
+        "model release"
+      ],
+      "date": "2026-05-24T14:39:10+02:00",
+      "author": "anthropic research"
+    },
+    {
+      "title": "building a hill-climbing machine: launching seven new mai models",
+      "picture": "assets/sculptures/sculpture_6.png",
+      "url": "https://microsoft.ai/news/building-a-hillclimbing-machine-launching-seven-new-mai-models/",
+      "summary": "microsoft launches its 'hill-climbing' family of models optimized for rapid iterative self-improvement and optimization tasks.",
+      "labels": [
+        "mai models",
+        "optimization",
+        "microsoft"
+      ],
+      "date": "2026-05-29T15:14:58+02:00",
+      "author": "microsoft research"
+    },
+    {
+      "title": "dreaming: better memory for a more helpful chatgpt",
+      "picture": "assets/sculptures/sculpture_8.png",
+      "url": "https://openai.com/index/chatgpt-memory-dreaming/",
+      "summary": "openai details its new offline background refinement technique codenamed 'dreaming' that structures long-term memory logs for chatgpt users.",
+      "labels": [
+        "chatgpt",
+        "memory refinement",
+        "openai"
+      ],
+      "date": "2026-05-26T14:44:59+02:00",
+      "author": "openai index"
+    },
+    {
+      "title": "built-in memory for claude managed agents",
+      "picture": "assets/sculptures/sculpture_5.png",
+      "url": "https://claude.com/blog/claude-managed-agents-memory",
+      "summary": "introducing a persistent state layer that allows managed AI agents to retain context and learning across session boundaries seamlessly.",
+      "labels": [
+        "managed agents",
+        "persistent memory",
+        "product release"
+      ],
+      "date": "2026-05-25T19:40:37+02:00",
+      "author": "claude product team"
+    },
+    {
+      "title": "harnessing claude's intelligence: 3 key patterns for building apps",
+      "picture": "assets/sculptures/sculpture_1.png",
+      "url": "https://claude.com/blog/harnessing-claudes-intelligence",
+      "summary": "anthropic outlines three fundamental design patterns\u2014the evaluator-optimizer, parallel workflow, and routing pattern\u2014to build robust agentic applications.",
+      "labels": [
+        "agentic patterns",
+        "application design",
+        "anthropic"
+      ],
+      "date": "2026-05-30T15:49:19+02:00",
+      "author": "anthropic editorial"
+    }
+  ],
+  "scientific breakthroughs": [
+    {
+      "title": "ai breakthrough: weathernext predicts hurricane melissa",
+      "picture": "assets/sculptures/sculpture_7.png",
+      "url": "https://deepmind.google/blog/how-weathernext-helped-the-national-hurricane-center-better-predict-hurricane-melissas-historic-landfall-in-jamaica/",
+      "summary": "google deepmind's weathernext model demonstrates high-resolution forecasting accuracy, anticipating the landfall of hurricane melissa days in advance.",
+      "labels": [
+        "climate modeling",
+        "weathernext",
+        "deepmind"
+      ],
+      "date": "2026-05-30T10:34:56+02:00",
+      "author": "deepmind weather team"
+    },
+    {
+      "title": "an openai model has disproved a central conjecture in discrete geometry",
+      "picture": "assets/sculptures/sculpture_1.png",
+      "url": "https://openai.com/index/model-disproves-discrete-geometry-conjecture/",
+      "summary": "openai researchers successfully use reasoning models to synthesize counterexamples disproving a long-standing conjecture in high-dimensional discrete geometry.",
+      "labels": [
+        "geometry",
+        "math discovery",
+        "deep reasoning"
+      ],
+      "date": "2026-05-27T15:30:39+02:00",
+      "author": "openai science"
+    }
+  ],
+  "blog posts & news": [
+    {
+      "title": "it\u2019s about time: the copilot usage report 2025",
+      "picture": "assets/sculptures/sculpture_4.png",
+      "url": "https://microsoft.ai/news/its-about-time-the-copilot-usage-report-2025/",
+      "summary": "a comprehensive survey analyzing productivity returns, developer satisfaction, and task completion speed-ups across enterprise copilot deployments.",
+      "labels": [
+        "productivity report",
+        "copilot metrics",
+        "enterprise survey"
+      ],
+      "date": "2026-05-27T16:20:21+02:00",
+      "author": "microsoft analytics"
+    },
+    {
+      "title": "openai frontier models and codex are now available on aws",
+      "picture": "assets/sculptures/sculpture_6.png",
+      "url": "https://openai.com/index/openai-frontier-models-and-codex-are-now-available-on-aws/",
+      "summary": "aws customers can now deploy and fine-tune openai's frontier architectures directly within secure enterprise cloud boundaries.",
+      "labels": [
+        "aws integration",
+        "enterprise cloud",
+        "openai"
+      ],
+      "date": "2026-05-24T10:14:12+02:00",
+      "author": "openai business"
+    },
+    {
+      "title": "microsoft build 2026: mai keynote transcript",
+      "picture": "assets/sculptures/sculpture_5.png",
+      "url": "https://microsoft.ai/news/microsoft-build-2026-mai-keynote-transcript/",
+      "summary": "full transcript of the keynote speech detailing the architecture behind microsoft's autonomous agent frameworks and developer tools.",
+      "labels": [
+        "microsoft build",
+        "keynote",
+        "transcript"
+      ],
+      "date": "2026-05-27T08:29:55+02:00",
+      "author": "microsoft ai"
+    }
+  ]
+}

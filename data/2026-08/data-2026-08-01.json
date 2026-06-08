@@ -1,0 +1,126 @@
+{
+  "edition": "2026-08-01",
+  "product and concept releases": [
+    {
+      "title": "work with codex from anywhere",
+      "picture": "assets/sculptures/sculpture_8.png",
+      "url": "https://openai.com/index/work-with-codex-from-anywhere/",
+      "summary": "unveiling a lightweight, offline-capable developer client that integrates openai codex predictions into custom terminal environments.",
+      "labels": [
+        "codex",
+        "developer tools",
+        "terminal client"
+      ],
+      "date": "2026-07-28T20:55:59+02:00",
+      "author": "codex team"
+    },
+    {
+      "title": "introducing google antigravity 2.0",
+      "picture": "assets/sculptures/sculpture_7.png",
+      "url": "https://antigravity.google/blog/introducing-google-antigravity-2-0",
+      "summary": "announcing the next-generation antigravity sdk with native orchestration primitives, self-healing code loops, and multi-agent sandboxing.",
+      "labels": [
+        "antigravity",
+        "agent sdk",
+        "framework release"
+      ],
+      "date": "2026-07-31T20:11:18+02:00",
+      "author": "antigravity core team"
+    },
+    {
+      "title": "redesigning claude code on desktop for parallel agents",
+      "picture": "assets/sculptures/sculpture_4.png",
+      "url": "https://claude.com/blog/claude-code-desktop-redesign",
+      "summary": "a revamped desktop client for claude code supporting concurrent, asynchronous agent streams solving multi-file programming tasks.",
+      "labels": [
+        "claude code",
+        "parallel execution",
+        "developer tools"
+      ],
+      "date": "2026-07-28T08:39:22+02:00",
+      "author": "anthropic developers"
+    }
+  ],
+  "scientific breakthroughs": [
+    {
+      "title": "scaling how we build and test our most advanced ai",
+      "picture": "assets/sculptures/sculpture_4.png",
+      "url": "https://ai.meta.com/blog/scaling-how-we-build-test-advanced-ai/",
+      "summary": "meta shares details of its global compute infrastructure and custom benchmarking framework designed to evaluate trillion-parameter multimodal models.",
+      "labels": [
+        "infrastructure",
+        "benchmarking",
+        "meta ai"
+      ],
+      "date": "2026-07-28T08:12:26+02:00",
+      "author": "meta infrastructure"
+    },
+    {
+      "title": "new ai tools for the future of science",
+      "picture": "assets/sculptures/sculpture_5.png",
+      "url": "https://blog.google/innovation-and-ai/technology/research/gemini-for-science-io-2026/",
+      "summary": "google previews gemini-powered scientific aids specialized in biochemical structures, molecular simulation, and cross-discipline data retrieval.",
+      "labels": [
+        "gemini",
+        "bio-computing",
+        "google io"
+      ],
+      "date": "2026-07-26T13:35:40+02:00",
+      "author": "google research"
+    },
+    {
+      "title": "the \"super weight:\" how even a single parameter can determine a large language model's behavior",
+      "picture": "assets/sculptures/sculpture_8.png",
+      "url": "https://machinelearning.apple.com/research/the-super-weight",
+      "summary": "apple machine learning researchers discover singular high-magnitude weights inside LLM matrices that control major downstream reasoning behaviors.",
+      "labels": [
+        "llm research",
+        "parameter analysis",
+        "apple ml"
+      ],
+      "date": "2026-07-31T12:24:19+02:00",
+      "author": "apple ml research"
+    }
+  ],
+  "blog posts & news": [
+    {
+      "title": "widening the conversation on frontier ai",
+      "picture": "assets/sculptures/sculpture_3.png",
+      "url": "https://www.anthropic.com/news/widening-conversation-ai",
+      "summary": "anthropic announces global public dialogue sessions to gather diverse citizen input on the alignment and safety thresholds of frontier models.",
+      "labels": [
+        "ai safety",
+        "governance",
+        "public policy"
+      ],
+      "date": "2026-07-32T10:58:26+02:00",
+      "author": "anthropic policy"
+    },
+    {
+      "title": "testing ads in chatgpt",
+      "picture": "assets/sculptures/sculpture_5.png",
+      "url": "https://openai.com/index/testing-ads-in-chatgpt/",
+      "summary": "openai announces an experimental pilot program testing non-intrusive, contextually relevant sponsored recommendations within chatgpt conversations.",
+      "labels": [
+        "monetization",
+        "chatgpt ads",
+        "announcement"
+      ],
+      "date": "2026-07-30T17:45:35+02:00",
+      "author": "openai product"
+    },
+    {
+      "title": "google io 2026: antigravity sdk highlights",
+      "picture": "assets/sculptures/sculpture_3.png",
+      "url": "https://antigravity.google/blog/google-io-2026",
+      "summary": "editorial summary of the google i/o 2026 keynote introducing advanced agentic coding standards and developer preview libraries.",
+      "labels": [
+        "google io",
+        "antigravity sdk",
+        "keynote"
+      ],
+      "date": "2026-07-32T18:44:10+02:00",
+      "author": "antigravity editorial"
+    }
+  ]
+}
