@@ -12,85 +12,130 @@ The target visual appearance is defined by this mockup:
 ![ai chronicle hub simplicity](./monochrome_abstract_sculptures.png)
 
 ---
+## 2. Structural Elements of the Web Page
 
-## 2. HTML Structuring Rules & Semantic Tags
-We strictly adhere to WHATWG guidelines for DOM layout structure. Standard layout divisions (`<div>` and `<span>`) are used strictly as a last resort when no semantic tag applies.
-- `<header>`: Encapsulates the branding row and the search input.
-- `<nav>`: Frames the navigation elements and action menus.
-- `<main>`: Serves as the central wrapper for the three category columns.
-- `<section>`: Houses each of the three category lists.
-- `<article>`: Marks individual content cards.
-- `<time>`: Used for rendering the content publication dates.
-- `<select>`: Dropdown menu for swapping historical editions.
-- `<a>`: Wrap each content card block with:
-  ```html
-  <a href="SOURCE_URL" target="_blank" rel="noopener noreferrer" class="content-card">
+This section defines the core visual components of the dashboard interface, their purpose, and the underlying data layer they are built upon.
+
+### 2.1 Branding Title & Search Bar
+- **Description**: Positioned at the very top of the layout. The branding title displays the lowercase serif string "ai chronicle hub" as the primary page identifier. The search bar is a sharp, clean text input field aligned on the right.
+- **Data Source & Dynamic Bindings**:
+  - **Branding Title**: Built on static HTML template content.
+  - **Search Bar**: Captures real-time text input on the client-side. The JavaScript controller (`app.js`) binds a keyup listener to filter the content cards across all three columns dynamically. Cards are matched by searching for matching text in their titles, summaries, and tags (labels).
+
+### 2.2 Edition Identifier & Selector
+- **Description**: Positioned on the left, directly underneath the main branding title. It displays the current newsletter edition date and includes a borderless selector dropdown to navigate through historical issues.
+- **Data Source & Dynamic Bindings**:
+  - The list of selectable options is populated dynamically by loading the catalog array `availableEditions` from the global configuration file `data/index.js`.
+  - On page load, the selector defaults to the latest available edition.
+  - Selecting a different date option triggers a client-side `fetch()` call to retrieve the corresponding weekly JSON database (`data/yyyy-mm/data-yyyy-mm-dd.json`) in real-time.
+
+### 2.3 Group of Categories (Three-Column Layout)
+- **Description**: The core content workspace of the archive, arranged as three vertical columns:
+  1. **`product and concept releases`**: Displays cards covering commercial product updates, open-source model releases, and tool updates.
+  2. **`scientific breakthroughs`**: Focuses on research paper abstracts, algorithm developments, and computational methodologies.
+  3. **`blog posts & news`**: Captures opinion editorials, community articles, and general announcements.
+- **Data Source & Dynamic Bindings**:
+  - Built upon the weekly database file (`data/yyyy-mm/data-yyyy-mm-dd.json`) fetched based on the active selector option.
+  - The JSON document exposes three distinct arrays matching the category keys: `"product and concept releases"`, `"scientific breakthroughs"`, and `"blog posts & news"`.
+  - Each item in the category array is a structured object populated into a content card template containing:
+    - `title`: Lowercase serif bold text.
+    - `picture`: Local path to a generated abstract sculpture PNG.
+    - `url`: Direct source link.
+    - `summary`: High-fidelity editorial summary.
+    - `labels`: Tag array for search/filtration.
+    - `date`: ISO 8601 offset timestamp.
+    - `author`: Content source author.
+
+---
+
+## 3. Rules of the Building Blocks
+
+This section lists the layout, styling, typography, and interactive rules governing the dashboard components, along with their scope of impact.
+
+### 3.1 CSS Design System & HSL Tokens
+- **Scope**: Global (applies to the entire canvas and styling context).
+- **Rule Details**: Custom HSL variables defined in `:root` of `styles.css` control colors and timings to maintain layout simplicity:
+  ```css
+  :root {
+    /* Stark limestone/eggshell canvas background */
+    --canvas-bg: #f5f4f0;            /* HSL: hsl(48, 16%, 95%) */
+
+    /* Deep charcoal-black for highly readable body copy */
+    --text-primary: #161616;         /* HSL: hsl(0, 0%, 9%) */
+
+    /* Antique bronze/gold for the main single-line brand title */
+    --title-bronze: #5c533c;         /* HSL: hsl(43, 21%, 30%) */
+
+    /* Soft, quiet gold for active text hover highlights */
+    --accent-gold: #c5a059;          /* HSL: hsl(40, 50%, 56%) */
+
+    /* Semi-transparent soft gold glow shadow (8% opacity) */
+    --glow-gold: rgba(197, 160, 89, 0.08);
+
+    /* Precise transitional timing (Apple-style ease-out) */
+    --transition-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+  }
   ```
-  This guarantees that selecting/clicking any content card dynamically redirects the user to the original content URL in a **new browser tab**.
 
----
+### 3.2 HTML Structuring & Semantics
+- **Scope**: Layout structure of all web pages.
+- **Rule Details & Affected Elements**:
+  - `<header>`: Encapsulates the branding title and the search input bar.
+  - `<nav>`: Frames any auxiliary options, navigation tabs, or active action sheets (such as the HTML email template preview/exporter).
+  - `<main>`: Wraps the three category columns.
+  - `<section>`: Houses each of the three category column grids.
+  - `<article>`: Represents individual content cards.
+  - `<time>`: Renders publication dates using structured ISO attributes.
+  - `<select>`: The borderless historical edition selector.
+  - `<a>`: Wrap each content card block with:
+    ```html
+    <a href="SOURCE_URL" target="_blank" rel="noopener noreferrer" class="content-card">
+    ```
+    This ensures that clicking any area of a card redirects the user to the source URL in a new browser tab.
 
-## 3. Typography & Vernon Adams Fonts
-We utilize Google Fonts designed by Vernon Adams to enforce a balanced combination of classical and geometric aesthetics:
-1. **Tinos (Serif)**:
-   - Used for the main `ai chronicle hub` branding title and article headers.
-   - Styled as all-lowercase.
-   - Article content titles below pictures must be styled as **bold**.
-2. **Oxygen (Sans-Serif)**:
-   - Used for bold column category names (`product and concept releases`, `scientific breakthroughs`, `blog posts & news` - styled strictly in all-lowercase bold), dropdown menus, search bar texts, and metadata.
-   - Letter-spacing is set to a light geometric scale: `0.06em`.
+### 3.3 Typography & Vernon Adams Fonts
+- **Scope**: Global text elements.
+- **Rule Details & Affected Elements**:
+  - **Tinos (Serif)**:
+    - *Affected Elements*: Main `ai chronicle hub` branding title, content card titles (`.content-title`).
+    - *Styles*: All-lowercase. Card titles must be styled as **bold**.
+  - **Oxygen (Sans-Serif)**:
+    - *Affected Elements*: Category headers, edition selector dropdown, search bar text, card summary text, tags, and author/date metadata.
+    - *Styles*: Category headers are styled strictly in all-lowercase bold. Letter-spacing is set to a light geometric scale: `0.06em`.
 
----
+### 3.4 Zero Visible Borders
+- **Scope**: Global canvas.
+- **Rule Details**: Under the simplicity design philosophy, no visible borders, horizontal rules, divider lines, or visual grid boundaries are allowed. Structural boundaries must be created strictly through vertical and horizontal whitespace padding.
 
-## 4. CSS Design System & HSL Tokens
-All colors are managed via custom properties inside `styles.css`.
-```css
-:root {
-  /* Stark limestone/eggshell canvas background */
-  --canvas-bg: #f5f4f0;            /* HSL: hsl(48, 16%, 95%) */
+### 3.5 Search Bar Styling
+- **Scope**: Search bar element.
+- **Rule Details**: Styled as a sharp, clean rectangle with subtly curved corners (`border-radius: 4px; border: 1px solid rgba(0, 0, 0, 0.15)`).
 
-  /* Deep charcoal-black for highly readable body copy */
-  --text-primary: #161616;         /* HSL: hsl(0, 0%, 9%) */
+### 3.6 Edition Dropdown Styling
+- **Scope**: Edition selector `<select>` element.
+- **Rule Details**: Rendered as a completely borderless dropdown element located directly beneath the branding title on the left.
 
-  /* Antique bronze/gold for the main single-line brand title */
-  --title-bronze: #5c533c;         /* HSL: hsl(43, 21%, 30%) */
-
-  /* Soft, quiet gold for active text hover highlights */
-  --accent-gold: #c5a059;          /* HSL: hsl(40, 50%, 56%) */
-
-  /* Semi-transparent soft gold glow shadow (8% opacity) */
-  --glow-gold: rgba(197, 160, 89, 0.08);
-
-  /* Precise transitional timing (Apple-style ease-out) */
-  --transition-smooth: cubic-bezier(0.25, 1, 0.5, 1);
-}
-```
-
-### Visual Styling Rules:
-- **Zero Visible Borders**: No borders, horizontal rules, divider lines, or frames are allowed on the canvas. Gaps between the header, columns, and elements are implemented strictly through vertical and horizontal whitespace padding.
-- **Search Bar styling**: Styled as a sharp rectangle with very subtly curved corners (`border-radius: 4px; border: 1px solid rgba(0, 0, 0, 0.15)`).
-- **Edition Dropdown menu**: Rendered as a borderless `<select>` drop-down directly beneath the page title on the left.
-- **Card Vertical Stack**: Content card contents must follow a strict vertical hierarchy (Image positioned directly above words):
-  1. Sculpture container.
+### 3.7 Content Card Anatomy & Stack
+- **Scope**: Content card elements (`<article>`).
+- **Rule Details**: Individual content items inside the column grids must display fields vertically stacked in this exact order (image directly above text):
+  1. Abstract sculpture image container.
   2. Bold serif content title (lowercase).
   3. Key summary teaser text.
-  4. Date/Author metadata.
+  4. Date and Author metadata block.
 
----
+### 3.8 Continuous Squircle Images
+- **Scope**: Sculpture image files and image containers (`.sculpture-container`).
+- **Rule Details**:
+  - Images must use pure black, white, and grey analog tones (no sepia or color parameters).
+  - Image containers use soft rounded corners (`border-radius: 24px`) with Apple macOS Dock squircle continuous curves.
+  - aspect-ratio is set to a landscape scale (`aspect-ratio: 1.5`) rather than a strict square.
 
-## 5. Continuous Squircle Image Rules
-Article illustrations are centered on abstract, high-art, sculpture-based artwork in pure black, white, and grey analog tones (strictly no sepia casts, cream tints, or color parameters).
-- **Apple macOS Dock Squircle Shape**: Image containers are soft rounded rectangles (`border-radius: 24px`) with squircle continuous corners, **elongated on a rectangular basis** rather than strictly square (aspect-ratio is set to a landscape scale, e.g. `aspect-ratio: 1.5`).
-
----
-
-## 6. Interactive Highlights & Softer Transitions
-To preserve the stark simplicity of the canvas, highlights are reserved strictly for interactive user actions.
-- **Singular Hover Highlight state**: Exactly one content card shows an active hover effect at any time.
-- **Transition Mechanics**:
-  - The hovered card's bold title text transitions smoothly to `var(--accent-gold)`.
-  - The squircle image container transitions to display an extremely soft, low-contrast, low-opacity **gold glow shadow** (`box-shadow: 0 16px 48px var(--glow-gold)`).
-  - No solid outlines, borders, or high-contrast glows are rendered.
+### 3.9 Interactive Highlights & Transitions
+- **Scope**: Content cards (`.content-card`), titles (`.content-title`), and sculpture containers (`.sculpture-container`).
+- **Rule Details**:
+  - **Singular Hover Highlight**: Exactly one content card shows an active hover effect at any time.
+  - Hover highlights use soft, borderless glows instead of solid outlines or borders.
+  - Transitions: Card title text changes color to `var(--accent-gold)`, and the squircle container displays a soft, low-contrast gold glow shadow (`box-shadow: 0 16px 48px var(--glow-gold)`) and translates up (`transform: translateY(-2px)`).
   ```css
   .sculpture-container {
     transition: box-shadow 0.4s var(--transition-smooth), transform 0.4s var(--transition-smooth);
@@ -107,10 +152,10 @@ To preserve the stark simplicity of the canvas, highlights are reserved strictly
   }
   ```
 
----
-
-## 7. Responsive Web Design Rules
-- **Fluid Typography**: Text sizing scales dynamically with the viewport width using CSS `clamp()` (e.g., `font-size: clamp(2rem, 5vw, 3.5rem)` for the main branding title).
-- **Adaptive Column Grids**: Main content columns adjust using flexible CSS Grid repeat functions (`grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))`), falling back smoothly to a single-column layout on compact mobile devices.
-- **Margins & Spacing**: Viewport-relative padding (`vw`, `vh`, and `rem`) scales spacing gracefully on screens ranging from small smartphones to extra-wide desktop monitors.
-- **Mobile Menu Drawer**: On smaller touch viewports, the options menu transitions into a clean bottom-sheet or slide-in drawer to keep the limestone screen focused entirely on the content.
+### 3.10 Responsive Web Design (RWD) Rules
+- **Scope**: Global viewport resizing.
+- **Rule Details & Affected Elements**:
+  - **Fluid Typography**: Sizing scales dynamically using `clamp()` (e.g., `font-size: clamp(2rem, 5vw, 3.5rem)` for the branding title).
+  - **Adaptive Column Grids**: Columns adjust using CSS Grid repeat (`grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))`), falling back to a single column on compact mobile devices.
+  - **Margins & Spacing**: Viewport-relative padding (`vw`, `vh`, `rem`) scales spacing gracefully.
+  - **Mobile Options menu**: On smaller touch viewports, the options menu transitions into a clean bottom-sheet or slide-in drawer.
