@@ -34,6 +34,30 @@ graph TD
     V2 --> V3["[V3] Final Layout Verification (task.md update)"]
 ```
 
+### 1.1 Flowchart Description & Traceability Matrix
+
+To ensure full traceability of the implementation path, the flowchart's transitions and stages are described below:
+
+1. **Sequential Core (Foundation Setup)**:
+   - **S1 (Start Container)**: The entry point starts the Nginx service. This must run first so that all subsequent files are hosted under a local HTTP origin to prevent CORS blocking.
+   - **S2 (CSS Tokens & Fonts)**: Once hosted, the styling foundation is laid in `styles.css`. HTML tags cannot be styled without these variables.
+   - **S3 (Semantic HTML DOM)**: Defines the layout structure in `index.html`. It references the stylesheet created in S2.
+   - **S4 (JS Dynamic Ingestion)**: In `app.js`, links are bound to the DOM elements created in S3 to handle dynamically fetched catalog items and JSON articles.
+
+2. **Branching Points (Parallel Tracks)**:
+   - Once S4 is complete and cards load dynamically, the workflow branches into two independent development streams:
+     - **Track A (Visual Styling & Effects)**:
+       - **S5 (Responsive Grids)**: Establishes column dimensions, sizing clamps, and whitespace padding rules in CSS.
+       - **S6 (Interactive Hover Glows)**: Builds on top of the grids, adding transition animations, continuous squircle images, and custom card-link overlay overlays.
+     - **Track B (Feature Integration)**:
+       - **S7 (Exporter UI & Compiler)**: Codes the HTML email template preview drawer and the copy-to-clipboard compiler.
+       - **S8 (Multi-Edition Search)**: Codes the dynamic search bar to search through active and historical edition files.
+
+3. **Join & Verification Phase (Validation Gates)**:
+   - **V1 (Combined Functional Testing)**: Merges Track A and Track B. Verifies that cards, search queries, and email exporters operate concurrently without visual breaks.
+   - **V2 (RWD Chrome DevTools Audit)**: Performs responsive audits on Pixel 7, Asus Zenbook Fold, iPad Pro, and Nest Hub Max viewports.
+   - **V3 (Final Layout Verification)**: The gatekeeper task. Updates the master `task.md` checklist indicating Phase 2 is complete.
+
 ---
 
 ## 2. Sequential Execution Steps (Step-by-Step)
