@@ -1,0 +1,4 @@
+const availableEditions = [
+  "2026-06-08",
+  "2026-08-01"
+];
