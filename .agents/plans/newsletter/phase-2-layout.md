@@ -57,14 +57,14 @@ This section defines the core visual components of the dashboard interface, thei
   - *Note on labels*: The article tags (labels) are **not** visually rendered on the cards. They are used exclusively behind the scenes for search query matching.
 - **Data Source & Dynamic Bindings**: Built dynamically using the selected weekly JSON database (`data/yyyy-mm/data-yyyy-mm-dd.json`), binding the `title`, `picture`, `url`, `summary`, `author`, and `date` attributes of each item object to its respective HTML element.
 
-### 2.5 Email Exporter View & Controls
-- **Description**: A secondary workspace activated by clicking the "Export Email" toggle button. In accordance with the grill-me alignment (Full-Workspace Toggle), toggling this view completely hides the 3-column web archive and swaps the workspace to display a single-column visual preview of the compiled email newsletter.
+### 2.5 Email Exporter Panel / Toggle Drawer & Controls
+- **Description**: A secondary workspace (implemented as a full-screen toggle drawer / exporter panel) activated by clicking the "Export Email" trigger button. In accordance with the grill-me alignment (Full-Workspace Toggle), toggling this view completely hides the 3-column web archive and swaps the workspace to display a single-column visual preview of the compiled email newsletter, acting as a toggle drawer that transitions into view.
 - **Visual Components**:
-  - **Toggle Trigger**: A button styled in Oxygen sans-serif (lowercase) located in the navigation header on the right.
-  - **Copy Action Button**: A centered, prominent action button (e.g., "copy email html") styled in bold Tinos bronze, placed above the template preview.
+  - **Exporter Panel Trigger Button**: A button styled in Oxygen sans-serif (lowercase) located in the navigation header on the right, labeled "export email" (or "export") to activate the email compatible HTML view.
+  - **Copy Action Button**: A centered, prominent action button (labeled "copy email html") styled in bold Tinos bronze, placed above the template preview.
   - **Back Trigger**: A "back to web archive" button that swaps the view back to the 3-column grid.
   - **Email Preview Canvas**: A centered, single-column document preview (`max-width: 600px` to match typical email clients) showing the compiled layout using nested-table mockups.
-- **Data Source & Dynamic Bindings**: The JavaScript compiler (`app.js`) iterates over the currently active edition's articles, wraps their content (titles, summaries, and paths) into inline-styled nested `<table>` tags, and injects this HTML string into the preview container. Clicking "copy email html" copies this raw compiled HTML string to the system clipboard.
+- **Data Source & Dynamic Bindings**: The JavaScript compiler (`app.js`) iterates over the currently active edition's articles, wraps their content (titles, summaries, and paths) into inline-styled nested `<table>` tags, and injects this HTML string into the preview container. Clicking the "copy email html" button copies this raw compiled HTML string to the system clipboard.
 
 ---
 
@@ -189,9 +189,9 @@ This section lists the layout, styling, typography, and interactive rules govern
     - **iPad Pro** (large tablet)
     - **Nest Hub Max** (smart display/desktop)
 
-### 3.11 HTML Email Exporter View Swap Rules
-- **Scope**: Exporter toggle actions, active workspace containers, and preview containers.
+### 3.11 HTML Email Exporter View Swap Rules (Toggle Drawer)
+- **Scope**: Exporter toggle drawer actions, active workspace containers, and preview containers.
 - **Rule Details**:
-  - **Workspace Toggle Transition**: View swapping must be implemented cleanly via CSS class toggling on the body or wrapper container (e.g., adding `.mode-email` to hide the `<main>` 3-column archive layout and show the `#email-workspace` container).
+  - **Workspace Toggle Transition (Toggle Drawer)**: View swapping must be implemented cleanly via CSS class toggling on the body or wrapper container (e.g., adding `.mode-email` to hide the `<main>` 3-column archive layout and show the `#email-workspace` panel/drawer).
   - **Email Preview Alignment**: The preview canvas is centered, constrained to `max-width: 600px`, and styled in standard HTML table layouts representing the exact, table-compatible, cross-client email template.
   - **Responsive Exporter**: On mobile viewports, the exporter action buttons stack vertically, and margins adapt using relative viewport padding.

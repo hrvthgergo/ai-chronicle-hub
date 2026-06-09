@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  layout:
+    build:
+      context: .
+      dockerfile: operation/layout.Dockerfile
+    container_name: ai_chronicle_layout
+    ports:
+      - "8080:80"
+    volumes:
+      - ./layout:/usr/share/nginx/html/layout:ro
+      - ./data:/usr/share/nginx/html/data:ro
+      - ./assets:/usr/share/nginx/html/assets:ro
+    restart: unless-stopped

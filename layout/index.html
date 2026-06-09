@@ -4,11 +4,77 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ai chronicle hub</title>
-  <!-- Shell placeholder for Phase 2 styling -->
+  <!-- Load Tinos and Oxygen Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&family=Tinos:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Shell layout will be implemented here -->
+
+  <!-- Sticky Header & Navigation Container -->
+  <div class="sticky-header-container">
+    <header class="app-header">
+      <h1 class="brand-title">ai chronicle hub</h1>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="search..." autocomplete="off">
+      </div>
+    </header>
+    <nav class="app-nav">
+      <div class="nav-left">
+        <span class="edition-label">edition:</span>
+        <div class="select-wrapper">
+          <select id="edition-select" aria-label="Select edition"></select>
+        </div>
+      </div>
+      <div class="nav-right">
+        <button id="exporter-toggle" class="btn-text">export email</button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Web Archive 3-Column Workspace -->
+  <main id="archive-workspace" class="workspace-section">
+    <div class="columns-grid">
+      <section class="category-column" id="col-products">
+        <h2 class="column-header">product and concept releases</h2>
+        <div class="cards-list" id="list-products"></div>
+      </section>
+      <section class="category-column" id="col-science">
+        <h2 class="column-header">scientific breakthroughs</h2>
+        <div class="cards-list" id="list-science"></div>
+      </section>
+      <section class="category-column" id="col-blog">
+        <h2 class="column-header">blog posts & news</h2>
+        <div class="cards-list" id="list-blog"></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Email Exporter Panel / Toggle Drawer Workspace -->
+  <div id="email-workspace" class="workspace-section" style="display: none;">
+    <div class="exporter-controls">
+      <button id="exporter-back" class="btn-text">back to web archive</button>
+      <button id="copy-email-btn" class="btn-primary">copy email html</button>
+    </div>
+    <div class="email-preview-wrapper">
+      <div id="email-preview-canvas"></div>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer for Edition Selection -->
+  <div id="mobile-drawer-overlay" class="mobile-drawer-overlay"></div>
+  <div id="mobile-drawer" class="mobile-drawer">
+    <div class="mobile-drawer-content">
+      <div class="mobile-drawer-header">
+        <span class="mobile-drawer-title">select edition</span>
+        <button id="close-drawer" class="btn-text">close</button>
+      </div>
+      <div id="mobile-edition-options" class="mobile-options-list"></div>
+    </div>
+  </div>
+
+  <!-- Ingest historical editions from config and run client app -->
   <script src="../data/index.js"></script>
   <script src="app.js"></script>
 </body>
