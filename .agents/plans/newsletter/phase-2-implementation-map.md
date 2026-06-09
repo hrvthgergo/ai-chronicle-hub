@@ -11,27 +11,27 @@ The diagram below maps out the dependencies. Sequential steps flow top-to-bottom
 ```mermaid
 graph TD
     %% Sequential Core Setup
-    S1["[S1] Start Container (docker-compose.layout.yml)"] --> S2["[S2] Define CSS Tokens & Fonts (styles.css)"]
-    S2 --> S3["[S3] Build Semantic HTML DOM Structure (index.html)"]
-    S3 --> S4["[S4] Implement JS Dynamic Ingestion (app.js)"]
+    S1[Start Dev Container in docker-compose.layout.yml] --> S2[Define CSS Tokens and Fonts in styles.css]
+    S2 --> S3[Build Semantic HTML DOM Structure in index.html]
+    S3 --> S4[Implement JS Dynamic Ingestion in app.js]
     
     %% Split into Parallel Tracks
-    S4 --> P1_Track["[Track A] Visual Styling & Effects"]
-    S4 --> P2_Track["[Track B] Feature Integration"]
+    S4 --> P1_Track[Track A: Visual Styling and Effects]
+    S4 --> P2_Track[Track B: Feature Integration]
     
     %% Parallel Track A: Visuals
-    P1_Track --> S5["[S5] Responsive Grids & Viewports (styles.css)"]
-    S5 --> S6["[S6] Interactive Hover Glows (styles.css)"]
+    P1_Track --> S5[Responsive Grids and Viewports in styles.css]
+    S5 --> S6[Interactive Hover Glows in styles.css]
     
     %% Parallel Track B: Features
-    P2_Track --> S7["[S7] Exporter UI & Compiler (app.js)"]
-    S7 --> S8["[S8] Multi-Edition Search Scope (app.js)"]
+    P2_Track --> S7[Exporter UI and Compiler in app.js]
+    S7 --> S8[Multi-Edition Search Scope in app.js]
     
     %% Join for Verification
-    S6 --> V1["[V1] Combined Functional Testing"]
+    S6 --> V1[Combined Functional Testing]
     S8 --> V1
-    V1 --> V2["[V2] RWD Chrome DevTools Audit (Pixel 7, Zenbook, iPad, Nest)"]
-    V2 --> V3["[V3] Final Layout Verification (task.md update)"]
+    V1 --> V2[RWD Chrome DevTools Audit]
+    V2 --> V3[Final Layout Verification]
 ```
 
 ### 1.1 Flowchart Description & Traceability Matrix
