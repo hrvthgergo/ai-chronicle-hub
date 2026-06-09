@@ -54,6 +54,7 @@ This section defines the core visual components of the dashboard interface, thei
   - Short high-fidelity editorial summary written by the curation agent.
   - Original author's name.
   - Date of the article.
+  - *Note on labels*: The article tags (labels) are **not** visually rendered on the cards. They are used exclusively behind the scenes for search query matching.
 - **Data Source & Dynamic Bindings**: Built dynamically using the selected weekly JSON database (`data/yyyy-mm/data-yyyy-mm-dd.json`), binding the `title`, `picture`, `url`, `summary`, `author`, and `date` attributes of each item object to its respective HTML element.
 
 ---
@@ -91,7 +92,7 @@ This section lists the layout, styling, typography, and interactive rules govern
 - **Scope**: Layout structure of all web pages.
 - **Rule Details & Affected Elements**:
   - `<header>`: Encapsulates the branding title and the search input bar.
-  - `<nav>`: Frames any auxiliary options, navigation tabs, or active action sheets (such as the HTML email template preview/exporter).
+  - `<nav>`: Frames the options and the exporter toggle. In accordance with the aligned layout flow, clicking the exporter toggle triggers a full-workspace toggle that completely swaps the view between the 3-column archive grid and the single-column email preview.
   - `<main>`: Wraps the three category columns.
   - `<section>`: Houses each of the three category column grids.
   - `<article>`: Represents individual content cards.
@@ -115,9 +116,11 @@ This section lists the layout, styling, typography, and interactive rules govern
     - *Affected Elements*: Category headers, edition selector dropdown, search bar text, card summary text, tags, and author/date metadata.
     - *Styles*: Category headers are styled strictly in all-lowercase bold. Letter-spacing is set to a light geometric scale: `0.06em`.
 
-### 3.4 Zero Visible Borders
+### 3.4 Zero Visible Borders & Desktop Scrolling
 - **Scope**: Global canvas.
-- **Rule Details**: Under the simplicity design philosophy, no visible borders, horizontal rules, divider lines, or visual grid boundaries are allowed. Structural boundaries must be created strictly through vertical and horizontal whitespace padding.
+- **Rule Details**:
+  - **No Borders**: Under the simplicity design philosophy, no visible borders, horizontal rules, divider lines, or visual grid boundaries are allowed. Structural boundaries must be created strictly through vertical and horizontal whitespace padding.
+  - **Global Desktop Scrolling**: On desktop viewports, category columns grow to their full height and scroll together as a single page unit (global page scrolling) under a sticky header, providing a premium, cohesive editorial feel.
 
 ### 3.5 Search Bar Styling
 - **Scope**: Search bar element.
