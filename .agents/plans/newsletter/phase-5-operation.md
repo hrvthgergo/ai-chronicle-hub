@@ -65,7 +65,62 @@ services:
       - ./data:/app/data
       - ./assets/sculptures:/app/assets/sculptures
     restart: unless-stopped
+
+### 1.3 Phase 2 Standalone Layout Containerization
+
+To allow developers to run, visually test, and verify the layout system (HTML, CSS, and dynamic Javascript loading) before implementing the Go/Python backend engines, a standalone development container configuration is provided.
+
+This environment runs a lightweight web server serving static project directories, maintaining the relative paths between `layout/`, `data/`, and `assets/`.
+
+#### Layout Testing Dockerfile (`operation/layout.Dockerfile`)
+```dockerfile
+FROM nginx:alpine
+
+# Remove default nginx welcome page
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy workspace directories preserving relative structure
+COPY ./layout /usr/share/nginx/html/layout
+COPY ./data /usr/share/nginx/html/data
+COPY ./assets /usr/share/nginx/html/assets
+
+# Create a root redirect to /layout/index.html
+RUN echo '<script>window.location.href="/layout/index.html"</script>' > /usr/share/nginx/html/index.html
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
 ```
+
+#### Layout Development Docker Compose (`docker-compose.layout.yml`)
+For active visual development, the container mounts local files as read-only volumes. Any edits to local HTML, CSS, or JS files will instantly live-reload in the browser without requiring a container rebuild.
+```yaml
+version: '3.8'
+
+services:
+  layout-test:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      # Bind mounts for instant feedback during Phase 2 development
+      - ./layout:/usr/share/nginx/html/layout:ro
+      - ./data:/usr/share/nginx/html/data:ro
+      - ./assets:/usr/share/nginx/html/assets:ro
+      # Add root index fallback redirect
+      - ./layout/index.html:/usr/share/nginx/html/index.html:ro
+    restart: always
+```
+
+#### Running & Verification Steps:
+1. Start the container from the workspace root:
+   ```bash
+   docker-compose -f docker-compose.layout.yml up --build -d
+   ```
+2. Open a web browser to `http://localhost:8080`.
+3. Assert that:
+   - The dropdown list successfully fetches `data/index.js` and lists `"2026-06-08"` and `"2026-08-01"`.
+   - Selecting an edition triggers a successful client-side `fetch()` call for the JSON files.
+   - Grayscale sculpture assets render in continuous squircles without CORS issues.
 
 ---
 
